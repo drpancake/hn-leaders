@@ -15,7 +15,7 @@ a, a:visited {
 }
 
 p {
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
     line-height: 1.65em;
 }
 
@@ -27,6 +27,8 @@ b {
     font-style: italic;
     font-size: 15px;
     opacity: 0.65;
+    text-align: center;
+    margin-top: 50px;
 }
 
 .container {
@@ -39,7 +41,7 @@ h1 {
     font-size: 48px;
     line-height: 58px;
     font-weight: bold;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 h2 {
@@ -66,11 +68,66 @@ h2 {
     background: #fff;
     box-shadow: rgb(0 0 0 / 10%) 0px 0px 24px;
     border-radius: 6px;
-    padding: 24px;
+    /* padding: 14px; */
     border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 15px;
 }
 
-@media (max-width: 900px) {
+.comment-author {
+    margin-bottom: 14px;
+    font-size: 14px;
+    padding-top: 14px;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.comment-content {
+    padding-left: 14px;
+    padding-right: 14px;
+    /* line-height: 1.65em; */
+}
+
+.author-icon {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    top: 2px;
+    color: rgba(0,0,0,0.4);
+}
+
+.karma {
+    color: #268A00;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.comment-footer {
+    background:rgba(0, 0, 0, 0.06);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 14px;
+    padding-top: 10px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    font-size: 14px;
+}
+
+.comment-story-title {
+    margin-bottom: 8px;
+}
+
+.comment-footer a {
+    color: rgba(0,0,0,0.6);
+}
+
+.footer-icon {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    top: 2px;
+    color: rgba(0,0,0,0.4);
+}
+
+/* @media (max-width: 900px) {
     body {
         padding: 20px 16px;
     }
@@ -92,11 +149,7 @@ h2 {
         margin-bottom: 30px;
     }
 
-    .sidenote {
-        font-size: 14px;
-    }
-
     .comment {
         padding: 16px;
     }
-}
+} */

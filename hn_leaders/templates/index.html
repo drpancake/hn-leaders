@@ -64,29 +64,35 @@
     <h1><span class="hn">HN</span> Leaders</h1>
     <div class="intro">
       <p>What are the most upvoted users of Hacker News commenting on? Powered by the <a
-          href="https://news.ycombinator.com/leaders" rel="noopener noreferrer">/leaders</a> top 50. Updates every hour.
+          href="https://news.ycombinator.com/leaders" rel="noopener noreferrer">/leaders</a> top 50. Updates every
+        thirty minutes.
       </p>
-      <p class="sidenote">Made by <a href="https://twitter.com/jamespotterdev">@jamespotterdev</a></p>
     </div>
     {% for comment in comments %}
     <div class="comment">
-      <div class="comment-author"><a href="https://news.ycombinator.com/user?id={{ comment.author }}"
-          rel="noopener noreferrer"><i data-feather="user"></i> {{ comment.author }}</a> <span
-          class="karma">12345</span> </div>
+      <div class="comment-author"><i data-feather="user" class="author-icon"></i> <a
+          href="https://news.ycombinator.com/user?id={{ comment.author }}" rel="noopener noreferrer">{{ comment.author
+          }}</a> <span class="karma">[{{
+          comment.author_karma }}]</span> </div>
       <div class="comment-content">
-        {{ comment.content|safe }}
-      </div>
-      <div class="comment-story-title">
-        On <a href="https://news.ycombinator.com/item?id={{ comment.story_id }}" rel="noopener noreferrer">{{
-          comment.story_title }}</a>
+        <p>
+          {{ comment.content|safe }}
+        </p>
       </div>
       <div class="comment-footer">
-        <i data-feather="clock"></i>
-        <script>document.write(timeSince(new Date({{ comment.created_i | safe }} * 1000)))</script> | <a
-          href="{{ comment.parent_url }}" rel="noopener noreferrer nofollow"><i data-feather="list"></i> Context</a>
+        <div class="comment-story-title">
+          <i data-feather="message-circle" class="footer-icon"></i> <a
+            href="https://news.ycombinator.com/item?id={{ comment.story_id }}" rel="noopener noreferrer">{{
+            comment.story_title }}</a>
+        </div>
+        <i data-feather="clock" class="footer-icon"></i>
+        <script>document.write(timeSince(new Date({{ comment.created_i | safe }} * 1000)))</script> [<a
+          href="{{ comment.comment_url }}" rel="noopener noreferrer nofollow">comment</a>] [<a
+          href="{{ comment.parent_url }}" rel="noopener noreferrer nofollow">context</a>]
       </div>
     </div>
     {% endfor %}
+    <div class="sidenote">Made by <a href="https://twitter.com/jamespotterdev">@jamespotterdev</a></div>
   </div>
   <script src="https://unpkg.com/feather-icons"></script>
   <script>
