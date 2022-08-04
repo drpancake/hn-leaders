@@ -35,6 +35,8 @@ b {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
+
+    word-break: break-word;
 }
 
 h1 {
@@ -127,14 +129,15 @@ h2 {
     color: rgba(0,0,0,0.4);
 }
 
-/* @media (max-width: 900px) {
+@media (max-width: 900px) {
     body {
         padding: 20px 16px;
     }
 
     h1 {
-        font-size: 36px;
-        line-height: 46px;
+        font-size: 38px;
+        line-height: 48px;
+        font-weight: bold;
         margin-bottom: 20px;
     }
 
@@ -148,8 +151,4 @@ h2 {
         font-size: 17px;
         margin-bottom: 30px;
     }
-
-    .comment {
-        padding: 16px;
-    }
-} */
+}

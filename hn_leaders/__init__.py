@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_caching import Cache
 from .feed import get_feed
 
-DEBUG = True
+DEBUG = False
 
 config = {
     "DEBUG": DEBUG,
