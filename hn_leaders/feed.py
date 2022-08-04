@@ -18,22 +18,23 @@ def get_leaders():
     b = requests.get("https://news.ycombinator.com/leaders").content
     soup = BeautifulSoup(b, "html.parser")
     leaders = {}
-    for a in soup.select("a.hnuser"):
+    for i, a in enumerate(soup.select("a.hnuser")):
+        rank = i + 1
         username = a.text.strip()
         karma_str = a.parent.parent.select("td")[-1].text.strip()
         karma = int(karma_str) if karma_str else None
-        leaders[username] = karma
-    missing = [u for u, k in leaders.items() if k is None]
+        leaders[username] = dict(karma=karma, rank=rank)
+    missing = [u for u, obj in leaders.items() if obj["karma"] is None]
     with ThreadPoolExecutor(max_workers=25) as executor:
         for username, karma in executor.map(
             lambda u: list(get_karma(u)), missing
         ):
-            leaders[username] = karma
-    res = sorted(leaders.items(), key=lambda x: x[1], reverse=True)
+            leaders[username]["karma"] = karma
+    res = sorted(leaders.items(), key=lambda x: x[1]["karma"], reverse=True)
     return res[:MAX_LEADERS]
 
 
-def get_comments(username, karma):
+def get_comments(username, karma, rank):
     print(f"getting comments: {username}")
     ts = int(arrow.get().shift(days=-14).timestamp())
     url = "https://hn.algolia.com/api/v1/search_by_date"
@@ -54,6 +55,7 @@ def get_comments(username, karma):
             created_i=hit["created_at_i"],
             author=hit["author"],
             author_karma=karma,
+            author_rank=rank,
             content=content,
             story_id=story_id,
             story_title=hit["story_title"],
@@ -71,7 +73,8 @@ def get_feed():
     comments = []
     with ThreadPoolExecutor(max_workers=20) as executor:
         for arr in executor.map(
-            lambda x: list(get_comments(x[0], x[1])), leaders
+            lambda x: list(get_comments(x[0], x[1]["karma"], x[1]["rank"])),
+            leaders,
         ):
             comments.extend(arr)
     comments.sort(key=lambda c: c["created_i"], reverse=True)

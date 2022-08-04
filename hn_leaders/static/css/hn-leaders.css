@@ -86,7 +86,10 @@ h2 {
 .comment-content {
     padding-left: 14px;
     padding-right: 14px;
-    /* line-height: 1.65em; */
+}
+
+.comment-content i {
+    font-style: italic;
 }
 
 .author-icon {
@@ -98,6 +101,12 @@ h2 {
 }
 
 .karma {
+    color: #268A00;
+    font-size: 11px;
+}
+
+.rank {
+    /* color: #F06406; */
     color: #268A00;
     font-weight: bold;
     font-size: 11px;

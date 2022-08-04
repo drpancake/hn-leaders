@@ -6,18 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HN Leaders - What are the most upvoted users of Hacker News commenting on?</title>
+  <link href="{{ url_for('static', filename='favicon.png') }}" rel="shortcut icon" type="image/png" />
   <link rel="stylesheet" href="{{ url_for('static', filename='fonts/inter/inter.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/hn-leaders.css') }}">
-  <!-- <meta name="description" content="TODO" /> -->
-  <!-- <meta property="og:type" content="article" /> -->
-  <!-- <meta property="og:url" content="https://jamespotter.dev/hacker-news-tech-trends/"> -->
-  <!-- <meta property="og:title" content="TODO"> -->
-  <!-- <meta property="og:image" content="https://jamespotter.dev/hacker-news-tech-trends/sharer.png"> -->
-  <!-- <meta property="og:description" content="TODO" /> -->
-  <!-- <meta property="twitter:title" content="TODO" /> -->
-  <!-- <meta property="twitter:description" content="TODO" /> -->
-  <!-- <meta property="twitter:image" content="https://jamespotter.dev/hacker-news-tech-trends/sharer.png" /> -->
+  <meta name="description"
+    content="What are the most upvoted users of Hacker News commenting on? Powered by the /leaders page and updated every 30 minutes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hn-leaders.herokuapp.com/">
+  <meta property="og:title" content="HN Leaders - What are the most upvoted users of Hacker News commenting on?">
+  <meta property="og:image" content="https://hn-leaders.herokuapp.com/static/sharer.png">
+  <meta property="og:description"
+    content="What are the most upvoted users of Hacker News commenting on? Powered by the /leaders page and updated every 30 minutes." />
+  <meta property="twitter:title" content="HN Leaders - What are the most upvoted users of Hacker News commenting on?" />
+  <meta property="twitter:description"
+    content="What are the most upvoted users of Hacker News commenting on? Powered by the /leaders page and updated every 30 minutes." />
+  <meta property="twitter:image" content="https://hn-leaders.herokuapp.com/static/sharer.png" />
 
   <script>
     var MINUTE = 60;
@@ -72,7 +76,7 @@
     <div class="comment">
       <div class="comment-author"><i data-feather="user" class="author-icon"></i> <a
           href="https://news.ycombinator.com/user?id={{ comment.author }}" rel="noopener noreferrer">{{ comment.author
-          }}</a> <span class="karma">[{{
+          }}</a> <span class="rank">ranked #{{ comment.author_rank }}</span> <span class="karma">[karma: {{
           comment.author_karma }}]</span> </div>
       <div class="comment-content">
         <p>
@@ -98,6 +102,9 @@
   <script>
     feather.replace();
   </script>
+  <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""
+      referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </body>
 
 </html>

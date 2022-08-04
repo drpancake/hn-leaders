@@ -3,6 +3,7 @@ from flask_caching import Cache
 from .feed import get_feed
 
 DEBUG = False
+# DEBUG = True
 
 config = {
     "DEBUG": DEBUG,
@@ -24,4 +25,5 @@ def get_feed_cached():
 @app.route("/", methods=["GET"])
 def index():
     comments = get_feed_cached()
+    print(comments[0])
     return render_template("index.html", comments=comments)
