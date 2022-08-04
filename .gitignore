@@ -92,3 +92,5 @@ ENV/
 .DS_Store
 .sass-output
 .vscode
+
+.cache

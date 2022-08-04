@@ -22,5 +22,12 @@ Create a virtual environment:
 Run locally:
 
 ```sh
-gunicorn run:app
+gunicorn hn_leaders:app --reload
+```
+
+## First time setup
+
+```sh
+heroku create --buildpack heroku/python --region us hn-leaders
+heroku dyno:type web=hobby  # don't sleep
 ```
