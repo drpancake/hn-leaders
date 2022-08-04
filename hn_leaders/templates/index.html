@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HN Leaders - What are the most upvoted users of Hacker News commenting on?</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/inter/inter.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/hn-leaders.css') }}">
+  <!-- <meta name="description" content="TODO" /> -->
+  <!-- <meta property="og:type" content="article" /> -->
+  <!-- <meta property="og:url" content="https://jamespotter.dev/hacker-news-tech-trends/"> -->
+  <!-- <meta property="og:title" content="TODO"> -->
+  <!-- <meta property="og:image" content="https://jamespotter.dev/hacker-news-tech-trends/sharer.png"> -->
+  <!-- <meta property="og:description" content="TODO" /> -->
+  <!-- <meta property="twitter:title" content="TODO" /> -->
+  <!-- <meta property="twitter:description" content="TODO" /> -->
+  <!-- <meta property="twitter:image" content="https://jamespotter.dev/hacker-news-tech-trends/sharer.png" /> -->
+
+  <script>
+    var MINUTE = 60;
+    var HOUR = MINUTE * 60;
+    var DAY = HOUR * 24;
+    var WEEK = DAY * 7;
+    var MONTH = DAY * 30;
+    var YEAR = DAY * 365;
+
+    function timeSince(date) {
+      const secondsAgo = Math.round((Date.now() - Number(date)) / 1000);
+      if (secondsAgo < MINUTE) {
+        return secondsAgo + ' second' + (secondsAgo !== 1 ? "s" : "") + ' ago';
+      }
+      var divisor;
+      var unit = "";
+      if (secondsAgo < HOUR) {
+        divisor = MINUTE;
+        unit = "minute";
+      } else if (secondsAgo < DAY) {
+        divisor = HOUR;
+        unit = "hour";
+      } else if (secondsAgo < WEEK) {
+        divisor = DAY;
+        unit = "day";
+      } else if (secondsAgo < MONTH) {
+        divisor = WEEK;
+        unit = "week";
+      } else if (secondsAgo < YEAR) {
+        divisor = MONTH;
+        unit = "month";
+      } else {
+        divisor = YEAR;
+        unit = "year";
+      }
+      let count = Math.floor(secondsAgo / divisor);
+      return count + ' ' + unit + (count > 1 ? "s" : "") + ' ago';
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1><span class="hn">HN</span> Leaders</h1>
+    <div class="intro">
+      <p>What are the most upvoted users of Hacker News commenting on? Powered by the <a
+          href="https://news.ycombinator.com/leaders" rel="noopener noreferrer">/leaders</a> top 50. Updates every hour.
+      </p>
+      <p class="sidenote">Made by <a href="https://twitter.com/jamespotterdev">@jamespotterdev</a></p>
+    </div>
+    {% for comment in comments %}
+    <div class="comment">
+      <div class="comment-author"><a href="https://news.ycombinator.com/user?id={{ comment.author }}"
+          rel="noopener noreferrer"><i data-feather="user"></i> {{ comment.author }}</a> <span
+          class="karma">12345</span> </div>
+      <div class="comment-content">
+        {{ comment.content|safe }}
+      </div>
+      <div class="comment-story-title">
+        On <a href="https://news.ycombinator.com/item?id={{ comment.story_id }}" rel="noopener noreferrer">{{
+          comment.story_title }}</a>
+      </div>
+      <div class="comment-footer">
+        <i data-feather="clock"></i>
+        <script>document.write(timeSince(new Date({{ comment.created_i | safe }} * 1000)))</script> | <a
+          href="{{ comment.parent_url }}" rel="noopener noreferrer nofollow"><i data-feather="list"></i> Context</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+
+</html>

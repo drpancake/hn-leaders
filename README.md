@@ -22,7 +22,19 @@ Create a virtual environment:
 Run locally:
 
 ```sh
-gunicorn hn_leaders:app --reload
+./scripts/run-local.sh
+```
+
+## Deploy
+
+```sh
+git push heroku master
+```
+
+## Logs
+
+```sh
+./scripts/logs-production.sh
 ```
 
 ## First time setup

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_caching import Cache
 from .feed import get_feed
 
@@ -8,8 +8,11 @@ from .feed import get_feed
 #     "CACHE_DEFAULT_TIMEOUT": 300,
 # }
 
+DEBUG = True
+
 config = {
-    "DEBUG": False,
+    "DEBUG": DEBUG,
+    "TEMPLATES_AUTO_RELOAD": DEBUG,
     "CACHE_TYPE": "FileSystemCache",
     "CACHE_DIR": ".cache",
     "CACHE_DEFAULT_TIMEOUT": 300,
@@ -19,8 +22,13 @@ app.config.from_mapping(config)
 cache = Cache(app)
 
 
-@app.route("/", methods=["GET"])
 @cache.cached(timeout=3600)
+def get_feed_cached():
+    return get_feed()
+
+
+@app.route("/", methods=["GET"])
 def index():
-    f = get_feed()
-    return f
+    comments = get_feed_cached()
+    # return comments
+    return render_template("index.html", comments=comments)
