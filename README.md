@@ -1,4 +1,4 @@
-# HN Leaders
+# HN Leaders
 
 ## Running locally
 
@@ -25,13 +25,13 @@ Run locally:
 ./scripts/run-local.sh
 ```
 
-## Deploy
+## Deploy
 
 ```sh
 git push heroku master
 ```
 
-## Logs
+## Logs
 
 ```sh
 ./scripts/logs-production.sh
