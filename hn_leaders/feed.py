@@ -1,4 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
+
 import arrow
 import requests
 from bs4 import BeautifulSoup
@@ -59,7 +60,6 @@ def get_comments(username, karma, rank):
             content=content,
             story_id=story_id,
             story_title=hit["story_title"],
-            story_url=hit["story_url"],
             comment_url="https://news.ycombinator.com/item?id=%s"
             % hit["objectID"],
             parent_url="https://news.ycombinator.com/item?id=%s"
