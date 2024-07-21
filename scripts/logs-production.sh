@@ -1,1 +1,1 @@
-heroku logs --tail
+heroku logs --tail --app hn-leaders
